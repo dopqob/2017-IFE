@@ -1,0 +1,137 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-family: font-family: "微软雅黑","Microsoft Yahei",Arial;
+}
+#container {
+	width: 980px;
+	margin: 0 auto;
+	border: 1px solid #000;
+}
+/* 
+	header 
+*/
+header {
+	position: relative;
+	width: 892px;
+	margin: 0 auto;
+	border-bottom: 2px solid #938e8c ;
+}
+header div {
+	width: 110px;
+	height: 61px;
+	background-color: #d45d5c;
+}
+header div a {
+	position: absolute;
+	left: 5px;
+	bottom: 2px;
+	color: #fff;
+	text-decoration: none;
+	font-family: "黑体";
+}
+header>span {
+	position: absolute;
+	right: 0;
+	bottom: 2px;
+	float: right;
+	color: #d45d5c;
+	font-family: "黑体";
+}
+/* 
+	top section 
+*/
+#top {
+	position: relative;
+	width: 892px;
+	margin: 30px auto;
+	background-color: #fff;
+}
+#top div:first-child {
+	position: relative;
+	width: 641px;
+}
+#top .leftblur {
+	position: absolute;
+	top: 0;
+	width: 191px;
+	height: 301px;
+	opacity: 0.5;
+	background-color: #75b86b;
+}
+#top .rightblur {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 191px;
+	height: 301px;
+	opacity: 0.5;
+	background-color: #cc8091;
+}
+#top>div:last-child {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 203px;
+	border-top: 2px solid #cc8091;
+}
+
+#top .headline {
+	font-size: 24px;
+	padding-top: 8px;
+	text-decoration: underline;
+	font-variant: small-caps;  /*小写字母以大写形式显示，但大小不变*/
+}
+.top-p1 {
+	color: #676767;
+	font-style: italic;
+	font-family: "楷体";
+}
+.top-p2 {
+	font-style: italic;
+	font-size: 116px;
+	color: #75b86b;
+	margin-left: -25px;
+	margin-top: -10px;
+}
+.top-p3 {
+	font-size: 55px;
+	color: #cc8091;
+}
+.top-p3+div {
+	display: inline-block;
+	padding-left: 5px;
+}
+.top-p3+div>p:first-child {
+	font-size: 18px;
+	color: #cc8091;
+}
+.top-p3+div>p:last-child {
+	color: #cc8091;
+}
+/* 
+	middle section 
+*/
+#middle article {
+	display: inline-block;
+}
+#middle h3 {
+	font-size: 16px;
+	text-decoration: underline;
+}
+#middle .middle-1 {
+	width: 210px;
+}
+#middle .middle-1 h3 {
+	color: #418c59;
+}
+#middle .middle-2 {
+	width: 210px;
+}
+#middle .middle-2 h3{
+	color: #d2994f;
+}
+#middle .middle-3 {
+	color: #cc7680;
+}
