@@ -1,0 +1,178 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: "黑体","微软雅黑",sans-serif;
+}
+.flright {
+	float: right;
+}
+#container {
+	margin: 0 auto;
+	overflow: scroll;
+}
+/*导航栏*/
+#top {
+	position: relative;
+	width: 1280px;
+	height: 57px;
+	margin: 0 auto;
+	line-height: 57px;
+	font-family: "微软雅黑";
+}
+#top>img {
+	position: absolute;
+	top: 12px;
+	left: 60px
+}
+#top>span {
+	font-size: 21px;
+	color: #424343;
+	margin-left: 104px;
+}
+#top>a {
+	color: #e74f4d;
+	padding-right: 60px;
+	text-decoration: none;
+}
+#top a img {
+	padding-top: 2px;
+}
+#top nav a {
+	display: inline-block;
+	height: 55px;
+	width: 65px;
+	color: #74777F;
+	margin-right: 30px;
+	text-align: center;
+	text-decoration: none;
+}
+#top nav a:hover {
+	color: #e74f4d;
+	border-bottom: 3px solid #e74f4d;
+}
+/*头部大图*/
+#part1 {
+	position: relative;
+	width: 1280px;
+	padding-top: 2px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-image: url(images/图一.png);
+}
+#part1 div {
+	position: absolute;
+	top: 233px;
+	left: 116px;
+}
+#part1 div>p:first-child {
+	font-size: 60px;
+	color: #fff;
+	margin-bottom: 5px;
+}
+#part1 div>p~p {
+	font-size: 21px;
+	color: #fff;
+	line-height: 1.5em;
+	margin-bottom: 60px;
+}
+#part1 div button {
+	width: 332px;
+	height: 65px;
+	font-size: 30px;
+	color: #fff;
+	border: none;
+	outline: none;
+	border-radius: 1px;
+	cursor: pointer;
+	background-color: #e74f4d;
+}
+/*中间icon部分*/
+#part2 {
+	width: 1280px;
+	margin: 0 auto;
+}
+#tableContainer {
+	display: table;
+}
+.tableRow {
+	display: table-row;
+}
+.tableCell {
+	display: table-cell;
+	width: 320px;
+	text-align: center;
+}
+.icon {
+	height: 134px;
+	vertical-align: middle;
+}
+.txt {
+	color: #767777;
+	height: 52px;
+	vertical-align: top;
+	border-right: 2px solid #B8B8B7;
+}
+.noborder {
+	border: none;
+}
+#part2>span {
+	display: block;
+	height: 65px;
+}
+/*活动搜索部分*/
+#part3 {
+	width: 1280px;
+	height: 700px;
+	margin: 0 auto;
+	text-align: center;
+	background-repeat: no-repeat;
+	background-image: url(images/看地图.png);
+}
+#part3>div:first-child {
+	height: 360px;
+	background-color: #E8E8E8;
+}
+#part3>div>img {
+	padding-top: 89px;
+	padding-bottom: 50px;
+}
+.part3-p1 {
+	font-size: 54px;
+	color: #6C6D6C;
+}
+#part3>div:last-child {
+	/*height: 340px;*/
+	padding-top: 53px;
+	padding-bottom: 122px;
+	background-image: url(images/看地图遮罩.png);
+}
+.part3-p2 {
+	color: #fff;
+	font-size: 21px;
+}
+.part3-p3 {
+	width: 32px;
+	margin: 10px 608px 20px;
+	border-top: 2px solid #fff;
+}
+.part3-p4 {
+	color: #fff;
+	font-size: 12px;
+	padding-bottom: 50px;
+}
+#part3 select {
+	width: 236px;
+	height: 36px;
+	outline: none;
+	margin-right: 30px;
+	border: 1px solid #AE3937;
+}
+#part3 button {
+	width: 236px;
+	height: 36px;
+	color: #fff;
+	outline: none;
+	border: none;
+	background-color: #AE3937;
+}
