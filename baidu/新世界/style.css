@@ -151,7 +151,8 @@
 	color: #fff;
 	font-size: 21px;
 }
-.part3-p3 {
+/*短横杠*/
+.line {
 	width: 32px;
 	margin: 10px 608px 20px;
 	border-top: 2px solid #fff;
@@ -180,37 +181,150 @@
 #part4 {
 	width: 1280px;
 	margin: 0 auto;
-	overflow: auto;
 	text-align: center;
 	background-color: #F7F7F7;
 }
-#part4 div {
-	float: left;
-	margin: 100px 35px 110px 0;
+#part4 ul {
+	padding-top: 100px;
+	padding-bottom: 110px;
 }
-#part4 div:first-child {
-	margin-left: 150px;
+#part4 ul li {
+	width: 220px;
+	margin-right: 35px;
+	display: inline-block;
 }
-#part4 div img {
+#part4 ul li:last-child {
+	margin-right: 0;
+}
+#part4 ul li img {
 	padding: 10px 8px;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 	border: 1px solid #E1E1E1;
 	background-color: #fff;
 }
-#part4 p~p {
+#part4 ul li h3 {
+	font-weight: normal;
+	line-height: 30px;
+}
+#part4 ul li p {
 	font-size: 12px;
+	font-weight: 300;
 	color: #898989;
-	margin-top: 12px;
 }
-#shanghai {
-	margin-bottom: 0;
-}
-#shanghai>p:first-child {
-	font-size: 23px;
+#part4 .shanghai h3 {
+	font-weight: normal;
+	line-height: 1em;
+	font-size: 22px;
 	letter-spacing: 1.2em;
 	text-indent: 1em;
 }
-#part4>#shanghai>p~p {
-	margin-top: 5px;
-	margin-bottom: 8px;
+#part4 .shanghai p {
+	line-height: 28px;
+}
+/*part5部分*/
+#part5 {
+	width: 1280px;
+	margin: 0 auto;
+}#part5 div>div {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+}
+#part5 div>div:first-child {
+	position: relative;
+	width: 850px;
+	height: 566px;
+	background-repeat: no-repeat;
+	background-image: url(images/legs.png);
+}
+#part5 div>div>img {
+	position: absolute;
+	top: 47%;
+	right: 0;
+}
+#part5 div>div>h2 {
+	font-size: 45px;
+	color: #fff;
+	font-weight: 300;
+	margin-top: 100px;
+}
+#part5 div>div>h1 {
+	font-weight: normal;
+	font-size: 150px;
+	line-height: 100px;
+	color: #fff;
+}
+#part5 div>div>h1+p {
+	font-size: 18px;
+	font-weight: 300;
+	color: #fff;
+	margin-top: 24px;
+	line-height: 40px;
+	text-align: left;
+	margin-left: 42%;
+}
+#part5 div>div:last-child {
+	width: 425px;
+}
+#part5 div h3 {
+	font-size: 16px;
+	margin-top: 100px;
+}
+#part5 div h3 i {
+	font-size: 17px;
+	font-style: normal;
+	color: #DF373C;
+}
+#part5 div h3~p {
+	font-size: 12px;
+	color: #AAA;
+	margin-top: 20px;
+	line-height: 20px;
+	font-family: "SimSun";
+}
+#part5 div button {
+	width: 105px;
+	height: 34px;
+	color: #DF373C;
+	margin-top: 50px;
+	outline: none;
+	cursor: pointer;
+	border: 1px solid #DF373C;
+	background-color: #fff;
+}
+#part5 div ul li {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin-top: 20px;
+	border-radius: 6px;
+	border: 2px solid #AAA;
+}
+#part5 div ul li:first-child {
+	background-color: #AAA;
+}
+/*#part5>ul {
+	list-style: none;
+}*/
+#part5>ul li {
+	width: 420px;
+	display: inline-block;
+}
+#part5>ul>li:first-child {
+	font-size: 16px;
+	color: #fff;
+	text-align: center;
+	background-color: #DF373C;
+}
+#part5>ul>li:first-child+li {
+	background-color: yellow;
+}
+#part5>ui>li.metro {
+	position: relative;
+	background-image: url(images/metro.png);
+}
+#part5>ui>li.metro>img:first-child {
+	position: absolute;
+	top: 41%;
+	left: 0;
 }
