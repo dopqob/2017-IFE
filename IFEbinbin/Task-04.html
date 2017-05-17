@@ -36,29 +36,52 @@
 
         <!-- 数字队列 -->
         <div id="queue">
-        <span>20</span>
         </div>
     </div>      
 
 <script type="text/javascript">
+        var queue = document.getElementById("queue");
+        var input = document.getElementById("num");
+        var leftin = document.getElementById("left-in");
+        var rightin = document.getElementById("right-in");
+        var leftout = document.getElementById("left-out");
+        var rightout = document.getElementById("right-out");
     /*左侧入方法：leftIn*/
     function leftIn() {
-        
-        var queue = document.getElementById("queue");
-        console.log(num);
         var sp = document.createElement("span");
-        sp.innerText = num;
+        sp.innerText = input.value;
         if(!queue.childNodes.length) {
             queue.appendChild(sp);
         } else {
             queue.insertBefore(sp, queue.firstChild);
         }
     }
+    /*右侧入方法：rightIn*/
+    function rightIn() {
+        var sp = document.createElement("span");
+        sp.innerText = input.value;
+        queue.appendChild(sp);
+    }
+    /*左侧出方法：leftOut*/
+    function leftOut() {
+        queue.removeChild(queue.firstChild);
+    }
+    /*右侧出方法：rightOut*/
+    function rightOut() {
+        queue.removeChild(queue.lastChild);
+    }
+    /*点击消失：clickDelete*/
+    function clickDelete(elem) {
+        elem.parentNode.removeChild(elem);
+    }
     function init() {
-        document.getElementById("left-in").onclick = leftIn;
-        
+        leftin.onclick = leftIn;
+        rightin.onclick = rightIn;
+        leftout.onclick = leftOut;
+        rightout.onclick = rightOut;
     }
     init();
+    clickDelete(this);
 </script>
 </body>
 </html>
