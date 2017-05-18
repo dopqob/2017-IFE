@@ -52,9 +52,8 @@
     /*左侧入方法：leftIn*/
     function leftIn() {
         //如果输入框是空的或者不是一个数字，弹出提示
-        if (!input.value || isNaN(input.value)      //输入框是空的或者不是一个数字
-                         || input.value < 20        //小于10
-                         || input.value > 200) {    //大于100
+        if (!input.value || isNaN(input.value) ||     //输入框是空的或者不是一个数字
+            input.value < 20  || input.value > 200) {
             alert("请输入20-200之间的数字！");
             input.focus();
         } else if(queue.children.length > 60) {
@@ -133,8 +132,8 @@
             childs[i].style.height = arr[i]+'px';
         }
     }
-    /*冒泡法排序*/
-    function bubbling() {
+    /*冒泡排序法*/
+    function bubbleSort() {
         var childs = queue.children;
         for (var i = 0; i < childs.length-1; i++) {
             for (var j = i+1; j < childs.length; j++) {
@@ -156,6 +155,7 @@
             }
         }
     }
+    
     /**
      * 清空
      */
