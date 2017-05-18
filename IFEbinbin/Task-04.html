@@ -10,19 +10,21 @@
         }
         body>div>div {
             margin-top: 5px;
+            padding-left: 10px;
             border: 1px solid #606060;
         }
         span {
             display: inline-block;
-            font-size: 36px;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            line-height: 50px;
             color: #fff;
             font-weight: bold;
-            margin: 10px 5px 10px 10px;
-            padding: 0 20px;
-            height: 80px;
-            line-height: 80px;
+            margin: 10px 5px 10px 0;
             background-color: red;
             cursor: pointer;
+            text-align: center;
         }
     </style>
   </head>
@@ -35,53 +37,70 @@
         <button id="right-out">右侧出</button>
 
         <!-- 数字队列 -->
-        <div id="queue">
-        </div>
+        <div id="queue"></div>
+        
     </div>      
 
 <script type="text/javascript">
-        var queue = document.getElementById("queue");
-        var input = document.getElementById("num");
-        var leftin = document.getElementById("left-in");
-        var rightin = document.getElementById("right-in");
-        var leftout = document.getElementById("left-out");
-        var rightout = document.getElementById("right-out");
+    var queue = document.getElementById("queue");
+    var input = document.getElementById("num");
+    var leftin = document.getElementById("left-in");
+    var rightin = document.getElementById("right-in");
+    var leftout = document.getElementById("left-out");
+    var rightout = document.getElementById("right-out");
     /*左侧入方法：leftIn*/
     function leftIn() {
-        var sp = document.createElement("span");
-        sp.innerText = input.value;
-        if(!queue.childNodes.length) {
-            queue.appendChild(sp);
+        //如果输入框是空的或者不是一个数字，弹出提示
+        if (!input.value || isNaN(input.value)) {
+            alert("请输入一个数字！");
+            input.focus();
         } else {
+            //创建一个span插入到第一个元素前面
+            var sp = document.createElement("span");
+            sp.innerText = input.value;
             queue.insertBefore(sp, queue.firstChild);
         }
     }
     /*右侧入方法：rightIn*/
     function rightIn() {
-        var sp = document.createElement("span");
-        sp.innerText = input.value;
-        queue.appendChild(sp);
+        if (!input.value || isNaN(input.value)) {
+            alert("请输入一个数字！");
+            input.focus();
+        } else {
+            var sp = document.createElement("span");
+            sp.innerText = input.value;
+            queue.appendChild(sp);
+        }
     }
     /*左侧出方法：leftOut*/
     function leftOut() {
-        queue.removeChild(queue.firstChild);
+        if (queue.children.length) {
+            alert(queue.firstChild.innerText);
+            queue.removeChild(queue.firstChild);
+        }
     }
     /*右侧出方法：rightOut*/
     function rightOut() {
-        queue.removeChild(queue.lastChild);
+        if (queue.children.length) {
+            alert(queue.lastChild.innerText);
+            queue.removeChild(queue.lastChild);
+        }
     }
-    /*点击消失：clickDelete*/
-    function clickDelete(elem) {
-        elem.parentNode.removeChild(elem);
+    /*点击删除*/
+    function clickDel() {
+        if(event.target.nodeName.toLowerCase()=="span") {
+            queue.removeChild(event.target);
+        }
     }
-    function init() {
+
+    window.onload = function() {
         leftin.onclick = leftIn;
         rightin.onclick = rightIn;
         leftout.onclick = leftOut;
         rightout.onclick = rightOut;
+        queue.onclick = clickDel;
     }
-    init();
-    clickDelete(this);
+    
 </script>
 </body>
 </html>
