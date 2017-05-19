@@ -92,10 +92,6 @@ function insertionSort(arr) {
 	}
 	return arr;
 }
-function dadon() {
-	document.getElementById("do"){
-		for (var i = 0; i < digd.length; i++) {
-			digd[i]
-		}
-	}
-}
+
+var arr = [1,3,5,7,9,2,4,6,8,10];
+console.log(insertionSort(arr));
