@@ -20,12 +20,12 @@ span {
 
 i {
     color: #fff;
-    line-height: 14px;
     font-style: normal;
     background-color: #FF0000;
 }
 textarea {
     width: 600px;
+    outline: none;
 }
 .searchBox {
     width: 430px;
