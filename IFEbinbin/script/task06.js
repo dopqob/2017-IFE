@@ -98,10 +98,10 @@ window.onload = function() {
 	};
 	leftout.onclick = function() {
 		deleteNode("left");
-	}
+	};
 	rightout.onclick = function() {
 		deleteNode("right");
-	}
+	};
 	show.onclick = deleteNode;
 	clear.onclick = clearAll;
 	searchbtn.onclick = search;
