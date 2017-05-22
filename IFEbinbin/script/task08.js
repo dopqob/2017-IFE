@@ -30,9 +30,6 @@ function postOrder(node) {
 		for (var i = 0; i < node.children.length; i++) {
 			postOrder(node.children[i]);
 		}
-		// postOrder(node.children[0]);
-		// postOrder(node.children[1]);
-		// postOrder(node.children[2]);
 		console.log(node.innerText);
 		showNode(node);
 	}
