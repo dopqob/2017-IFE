@@ -75,21 +75,22 @@
     /*左侧出方法：leftOut*/
     function leftOut() {
         if (queue.children.length) {
-            alert(queue.firstChild.innerText);
+            alert("移除最左边的："+ queue.firstChild.innerText);
             queue.removeChild(queue.firstChild);
         }
     }
     /*右侧出方法：rightOut*/
     function rightOut() {
         if (queue.children.length) {
-            alert(queue.lastChild.innerText);
+            alert("移除最右边的："+ queue.lastChild.innerText);
             queue.removeChild(queue.lastChild);
         }
     }
     /*点击删除*/
-    function clickDel() {
-        if(event.target.nodeName.toLowerCase()=="span") {
-            queue.removeChild(event.target);
+    function clickDel(elem) {
+        var e = elem.target;
+        if(e.nodeName.toLowerCase()=="span") {
+            queue.removeChild(e);
         }
     }
 
@@ -98,7 +99,9 @@
         rightin.onclick = rightIn;
         leftout.onclick = leftOut;
         rightout.onclick = rightOut;
-        queue.onclick = clickDel;
+        queue.onclick = function() {
+            clickDel(event);
+        }
     }
     
 </script>

@@ -2,15 +2,32 @@ var root = document.getElementById("root");
 var btn = document.getElementById("btn"),
 	preBtn = btn.children[0],
 	postBtn = btn.children[1];
-var search = document.getElementById("search");
+var search = document.getElementById("search"),
 	preSearchBtn = search.children[0],
 	searchInput = search.children[1],
 	postSearchBtn = search.children[2];
 var timer = 0,
 	run = true;
-//新建一个变量，用来储存后序查询最后停留的节点，以用于初始化时重置节点背景色
-var temp;
+var temp;	//新建一个变量，用来储存查询最后停留的节点，以用于初始化时重置节点背景色
+var addOrDel = document.getElementById("addOrDel"),
+	addNode = addOrDel.children[0],
+	delNode = addOrDel.children[1];
+//定义一个变量用来储存被选中的节点
+var selElem = null;
 
+// 初始化节点样式
+function initialize(node) {
+	if(node) {
+		node.style.backgroundColor = '#fff';
+		for (var i = 0; i < node.children.length; i++) {
+			preOrder(node.children[i]);
+		}
+	}
+	if(selElem) {
+		selElem.style = "";
+		selElem = null;
+	}
+}
 /*给当前遍历到的节点添加背景色*/
 function showNode(node) {
 	if(run) {
@@ -26,6 +43,7 @@ function showNode(node) {
 
 /*给搜索到的元素上色*/
 function colorNode(node) {
+	// node.style.backgroundColor = '#fff';
 	setTimeout(function() {
 		node.style.backgroundColor = "#FF7FB6";
 		for (var i = 0; i < node.children.length; i++) {
@@ -63,13 +81,13 @@ function postOrder(node) {
 		showNode(node);
 	}
 }
-	
+
 /*前序查询*/
 function preSearch(node) {
 	//如果temp有值就初始化
-	if(temp) {
-		temp.style.backgroundColor = '#fff';
-	}
+	// if(temp) {
+	// 	temp.style.backgroundColor = '#fff';
+	// }
 	var str = searchInput.value.trim();
 	if(!str) {
 		alert("请输入要查询的信息！");
@@ -80,6 +98,7 @@ function preSearch(node) {
 	if(node) {
 		if (str && node.childNodes[0].nodeValue.trim() === str) {
 			run = false;
+			// temp = node;
 			colorNode(node);
 			return false;
 		}
@@ -92,9 +111,10 @@ function preSearch(node) {
 
 /*后序查询*/
 function postSearch(node) {
-	if(temp) {
-		temp.style.backgroundColor = '#fff';
-	}
+	//如果temp有值就初始化
+	// if(temp) {
+	// 	temp.style.backgroundColor = '#fff';
+	// }
 	var str = searchInput.value.trim();
 	if(!str) {
 		alert("请输入要查询的信息！");
@@ -109,7 +129,7 @@ function postSearch(node) {
 		showNode(node);
 		if (str && node.childNodes[0].nodeValue.trim() === str) {
 			run = false;
-			temp = node;
+			// temp = node;
 			colorNode(node);
 			return false;
 		}
@@ -132,6 +152,49 @@ function enableBtn() {
 	}
 }
 
+// 选择节点
+function selectElem(elem) {
+	// if(temp) {
+	// 	temp.style.backgroundColor = '#fff';
+	// }
+	// if(selElem) {
+	// 	selElem.style = "";
+	// 	selElem.style.backgroundColor = '#fff';
+	// 	selElem = null;
+	// }
+	var e = elem.target;
+	if(!e.style.border) {
+		e.style.border = "5px solid red";
+		selElem = e;
+	}
+}
+//增加节点
+function addElem(elem) {
+	var str = searchInput.value;
+	if(!str) {
+		alert("请输入节点内容");
+		searchInput.focus();
+		return false;
+	}
+	if(elem) {
+		var div = document.createElement("div");
+		div.innerHTML = str;
+		elem.appendChild(div);
+	} else {
+		alert("请选择一个节点！");
+	}
+
+}
+//删除选中元素
+function delElem(elem) {
+	if(elem) {
+		// console.log(elem);
+		elem.parentNode.removeChild(elem);
+	} else {
+		alert("请选择一个节点！");
+	}
+}
+
 //前序遍历按钮绑定事件
 preBtn.onclick = function() {
 	disableBtn();
@@ -148,6 +211,7 @@ postBtn.onclick = function() {
 }
 //前序搜索按钮绑定事件
 preSearchBtn.onclick = function() {
+	initialize();
 	disableBtn();
 	preSearch(root);
 	msg();
@@ -157,6 +221,7 @@ preSearchBtn.onclick = function() {
 }
 //后序搜索按钮绑定事件
 postSearchBtn.onclick = function() {
+	initialize();
 	disableBtn();
 	postSearch(root);
 	msg();
@@ -164,5 +229,21 @@ postSearchBtn.onclick = function() {
 	timer = 0;
 	run = true;
 }
+//点击选择节点
+root.onclick = function() {
+	initialize();
+	selectElem(event);
+}
+//添加节点按钮绑定事件
+addNode.onclick = function() {
+	addElem(selElem);
+}
+// 删除节点按钮绑定事件
+delNode.onclick = function() {
+	delElem(selElem);
+	selElem = null;
+}
+
+
 
 
