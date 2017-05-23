@@ -1,28 +1,30 @@
-var root = document.getElementById("root");
-var btn = document.getElementById("btn"),
+var root = document.getElementById("root"),
+	btn = document.getElementById("btn"),
 	preBtn = btn.children[0],
-	postBtn = btn.children[1];
-var search = document.getElementById("search"),
+	postBtn = btn.children[1],
+	search = document.getElementById("search"),
 	preSearchBtn = search.children[0],
 	searchInput = search.children[1],
-	postSearchBtn = search.children[2];
-var timer = 0,
-	run = true;
-var temp;	//新建一个变量，用来储存查询最后停留的节点，以用于初始化时重置节点背景色
-var addOrDel = document.getElementById("addOrDel"),
+	postSearchBtn = search.children[2],
+	addOrDel = document.getElementById("addOrDel"),
 	addNode = addOrDel.children[0],
-	delNode = addOrDel.children[1];
-//定义一个变量用来储存被选中的节点
-var selElem = null;
+	delNode = addOrDel.children[1],
+	timer = 0,
+	run = true,
+	selElem = null;	//定义一个变量用来储存被选中的节点
 
-// 初始化节点样式
-function initialize(node) {
-	if(node) {
-		node.style.backgroundColor = '#fff';
+//重置所有节点背景色
+function resetBgColor(node) {
+	if(node){
+		node.style.backgroundColor = "#fff";
 		for (var i = 0; i < node.children.length; i++) {
-			preOrder(node.children[i]);
+			resetBgColor(node.children[i]);
 		}
 	}
+}
+// 初始化节点样式
+function initialize(node) {
+	resetBgColor(node);
 	if(selElem) {
 		selElem.style = "";
 		selElem = null;
@@ -30,6 +32,7 @@ function initialize(node) {
 }
 /*给当前遍历到的节点添加背景色*/
 function showNode(node) {
+	//当run为true时定时器执行，否则停止执行
 	if(run) {
 		node.style.backgroundColor = '#fff';
 		setTimeout(function() {
@@ -43,7 +46,6 @@ function showNode(node) {
 
 /*给搜索到的元素上色*/
 function colorNode(node) {
-	// node.style.backgroundColor = '#fff';
 	setTimeout(function() {
 		node.style.backgroundColor = "#FF7FB6";
 		for (var i = 0; i < node.children.length; i++) {
@@ -77,17 +79,12 @@ function postOrder(node) {
 		for (var i = 0; i < node.children.length; i++) {
 			postOrder(node.children[i]);
 		}
-		// console.log(node.innerText);
 		showNode(node);
 	}
 }
 
 /*前序查询*/
 function preSearch(node) {
-	//如果temp有值就初始化
-	// if(temp) {
-	// 	temp.style.backgroundColor = '#fff';
-	// }
 	var str = searchInput.value.trim();
 	if(!str) {
 		alert("请输入要查询的信息！");
@@ -98,7 +95,7 @@ function preSearch(node) {
 	if(node) {
 		if (str && node.childNodes[0].nodeValue.trim() === str) {
 			run = false;
-			// temp = node;
+			temp = node;
 			colorNode(node);
 			return false;
 		}
@@ -111,10 +108,6 @@ function preSearch(node) {
 
 /*后序查询*/
 function postSearch(node) {
-	//如果temp有值就初始化
-	// if(temp) {
-	// 	temp.style.backgroundColor = '#fff';
-	// }
 	var str = searchInput.value.trim();
 	if(!str) {
 		alert("请输入要查询的信息！");
@@ -129,14 +122,13 @@ function postSearch(node) {
 		showNode(node);
 		if (str && node.childNodes[0].nodeValue.trim() === str) {
 			run = false;
-			// temp = node;
 			colorNode(node);
 			return false;
 		}
 	}
 }
 
-/*置灰按钮*/
+/*置灰按钮，防止多个操作同时进行*/
 function disableBtn() {
 	var btns = document.getElementsByTagName("button");
 	for (var i = 0; i < btns.length; i++) {
@@ -154,19 +146,9 @@ function enableBtn() {
 
 // 选择节点
 function selectElem(elem) {
-	// if(temp) {
-	// 	temp.style.backgroundColor = '#fff';
-	// }
-	// if(selElem) {
-	// 	selElem.style = "";
-	// 	selElem.style.backgroundColor = '#fff';
-	// 	selElem = null;
-	// }
 	var e = elem.target;
-	if(!e.style.border) {
-		e.style.border = "5px solid red";
-		selElem = e;
-	}
+	e.style.border = "5px solid red";
+	selElem = e;
 }
 //增加节点
 function addElem(elem) {
@@ -188,7 +170,6 @@ function addElem(elem) {
 //删除选中元素
 function delElem(elem) {
 	if(elem) {
-		// console.log(elem);
 		elem.parentNode.removeChild(elem);
 	} else {
 		alert("请选择一个节点！");
@@ -197,6 +178,7 @@ function delElem(elem) {
 
 //前序遍历按钮绑定事件
 preBtn.onclick = function() {
+	initialize(root);
 	disableBtn();
 	preOrder(root);
 	setTimeout(enableBtn, timer);
@@ -204,6 +186,7 @@ preBtn.onclick = function() {
 }
 //后序遍历按钮绑定事件
 postBtn.onclick = function() {
+	initialize(root);
 	disableBtn();
 	postOrder(root);
 	setTimeout(enableBtn, timer);
@@ -211,7 +194,7 @@ postBtn.onclick = function() {
 }
 //前序搜索按钮绑定事件
 preSearchBtn.onclick = function() {
-	initialize();
+	initialize(root);
 	disableBtn();
 	preSearch(root);
 	msg();
@@ -221,7 +204,7 @@ preSearchBtn.onclick = function() {
 }
 //后序搜索按钮绑定事件
 postSearchBtn.onclick = function() {
-	initialize();
+	initialize(root);
 	disableBtn();
 	postSearch(root);
 	msg();
@@ -231,7 +214,7 @@ postSearchBtn.onclick = function() {
 }
 //点击选择节点
 root.onclick = function() {
-	initialize();
+	initialize(root);
 	selectElem(event);
 }
 //添加节点按钮绑定事件

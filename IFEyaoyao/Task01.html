@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>IFE YaoYao Task 01</title>
+	<style>
+		input {
+			border-radius: 3px;
+			width: 240px;
+			height: 24px;
+			outline: none;
+			margin-left: 15px;
+			border: 1px solid #CCCCCC;
+		}
+		button {
+			width: 50px;
+			height: 28px;
+			color: #fff;
+			border-radius: 3px;
+			border: 1px solid #1F5696;
+			background-color: #2563AC;
+		}
+		span {
+			font-size: 0.8em;
+			display: none;
+			margin-left: 53px;
+		}
+		.length {
+			color: #989898;
+		}
+		.is_null {
+			color: #D30910;
+		}
+		.correct {
+			color: #51B039;
+		}
+	</style>
+</head>
+<body>
+	名称
+	<input type="text" id="name">
+	<button id="check">验证</button><br>
+	<span class="length">必填，长度为4~16个字符</span>
+	<span class="is_null">姓名不能为空</span>
+	<span class="correct">名称格式正确</span>
+	<script>
+		var input = document.getElementById("name");
+		var check = document.getElementById("check");
+		var len = document.getElementsByClassName("length");
+		var is_null = document.getElementsByClassName("is_null");
+		var correct = document.getElementsByClassName("correct");
+
+		check.onclick = function() {
+			reset();
+			var name = input.value;
+			if(!name) {
+				input.style.border = "1px solid #D30910";
+				is_null[0].style.display = "block";
+			} else if(name.length < 4 || name.length > 16) {
+				input.style.border = "1px solid #C1C1C1";
+				len[0].style.display = "block";
+			} else {
+				input.style.border = "1px solid #51B039";
+				correct[0].style.display = "block";
+			}
+			input.focus();
+		}
+
+		function reset() {
+			input.style = "";
+			len[0].style = "";
+			is_null[0].style = "";
+			correct[0].style = "";
+		}
+	</script>
+</body>
+</html>
