@@ -1,0 +1,31 @@
+label {
+	margin-left: 85px;
+}
+select {
+	height: 30px;
+	outline: none;
+	border-radius: 5px;
+}
+select:first-child {
+	width: 100px;
+	margin-left: 20px;
+}
+select:nth-child(2) {
+	width: 200px;
+	margin-left: 50px;
+}
+#college {
+	margin-top: 30px;
+	text-indent: 2em;
+}
+#company {
+	display: none;
+	margin-top: 30px;
+}
+#company input {
+	width: 351px;
+	height: 25px;
+	margin-left: 20px;
+	border-radius: 5px;
+	border: 1px solid #A9A9A9;
+}
