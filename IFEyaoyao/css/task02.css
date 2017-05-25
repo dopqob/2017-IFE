@@ -16,27 +16,19 @@ button {
     background-color: #2563AC;
 }
 
-span {
+p {
+    color: #989898;
     font-size: 0.8em;
     display: none;
+    margin-top: 0px;
     margin-left: 3px;
+    margin-bottom: 5px;
 }
 
 td {
     vertical-align: top;
 }
 
-.hintInfo {
-    color: #989898;
-}
-
-.errorInfo {
-    color: #D30910;
-}
-
-.correctInfo {
-    color: #51B039;
-}
 .align-right {
 	text-align: right;
     padding-top: 3px;

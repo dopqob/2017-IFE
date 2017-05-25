@@ -7,13 +7,8 @@ input {
     text-indent: 2px;
 }
 
-button {
-    width: 50px;
-    height: 28px;
-    color: #fff;
-    border-radius: 3px;
-    border: 1px solid #1F5696;
-    background-color: #2563AC;
+input:focus + p {
+    display: block;
 }
 
 p {
@@ -22,6 +17,15 @@ p {
     display: none;
     margin-top: 0px;
     margin-left: 3px;
+}
+
+button {
+    width: 50px;
+    height: 28px;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid #1F5696;
+    background-color: #2563AC;
 }
 
 td {

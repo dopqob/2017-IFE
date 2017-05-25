@@ -10,15 +10,13 @@ var user = $("user"),
     result = true;
 
 function checkName(str) {
-	if(str === null) {
-		result = false;
+	if(!str) {
 		return 0;	//名称不能为空
 	} else {
 		// 一个中文字符占用2个英文字符，此处做下转换
 		var re = /[^x00-xff]/g;
 		str = str.replace(re, "aa");
-		if (str.length >=4 && str.length <= 16) {
-			result = false;
+		if (str.length < 4 || str.length > 16) {
 			return 1;	//长度为4~16个字符
 		} else {
 			return 2;	//名称正确
@@ -30,11 +28,9 @@ function checkPsw(str) {
 	// 校验密码：只能输入6-16个字母、数字、下划线
 	var re = /^(\w){6,16}$/;
 	if (!str) {
-		result = false;
 		return 3;	//密码不能为空
 	} else {
 		if (!re.test(str)) {
-			result = false;
 			return 4;	//密码应为6-16个字母、数字或下划线组成
 		} else {
 			return 5;	//密码格式正确
@@ -45,11 +41,9 @@ function checkPsw(str) {
 function checkRpsw(str) {
 	var psw = password.value;
 	if (!psw) {
-		result = false;
 		return 3;
 	}
 	if (str !== psw) {
-		result = false;
 		return 6;	//密码输入不一致
 	}
 	return 5;
@@ -58,7 +52,6 @@ function checkRpsw(str) {
 function checkEmail(str) {
 	var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
 	if (!reg.test(str)) {
-		result = false;
 		return 7;	//邮箱格式错误
 	}
 	return 8;	//邮箱格式正确
@@ -67,7 +60,6 @@ function checkEmail(str) {
 function checkTelNum(str) {
 	var reg= /^1[3578]\d{9}$/;
 	if (!reg.test(str)) {
-		result = false;
 		return 9;	//请输入正确的手机号码
 	}
 	return 10;	//手机号码正确
@@ -136,27 +128,52 @@ function showMsg(elem, num) {
 	}
 }
 
-function proof(elem, fn, num) {
+function proof(elem, func, num) {
 	var str = elem.value;
-	var num = fn(str);
+	var num = func(str);
 	showMsg(elem, num);
 }
 
-user.onblur = function() {
-	proof(user, checkName);
+function checkBorder(tag) {
+	var result = true;
+	var tags = document.getElementsByTagName(tag);
+	for (var i = 0; i < tags.length; i++) {
+		if(tags[i].style.borderColor === "reg(211, 9, 16)") {
+			result = false;
+		}
+	}
+	return result;
 }
-// user.addEventListener("blur", function(event) {
-// 	proof(event.target, checkName)
-// });
-
-
-// var user = $("user"),
-//     password = $("password"),
-//     confirmPass = $("confirmPass"),
-//     email = $("email"),
-//     cellphone = $("cellphone"),
-//     check = $("check");
+// user.onblur = function() {
+// 	proof(user, checkName);
+// }
+user.addEventListener("blur", function(event) {
+	proof(user, checkName);
+});
+password.addEventListener("blur", function(event) {
+	proof(password, checkPsw);
+});
+confirmPass.addEventListener("blur", function(event) {
+	proof(confirmPass, checkRpsw);
+});
+email.addEventListener("blur", function(event) {
+	proof(email, checkEmail);
+});
+cellphone.addEventListener("blur", function(event) {
+	proof(cellphone, checkTelNum);
+});
 
 check.onclick = function() {
-
+	proof(user, checkName);
+	proof(password, checkPsw);
+	proof(confirmPass, checkRpsw);
+	proof(email, checkEmail);
+	proof(cellphone, checkTelNum);
+	if(checkBorder("input")) {
+		alert("提交失败");
+		return false;
+	} else {
+		alert("提交成功");
+	}
 }
+

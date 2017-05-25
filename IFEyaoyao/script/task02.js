@@ -5,127 +5,118 @@ var user = document.getElementById("user"),
     cellphone = document.getElementById("cellphone"),
     check = document.getElementById("check");
 
-var hintInfo = document.getElementsByClassName("hintInfo"),
-    errorInfo = document.getElementsByClassName("errorInfo"),
-    correctInfo = document.getElementsByClassName("correctInfo");
-
-// 重置
-function reset() {
-    var spans = document.getElementsByTagName("span");
-    for (var i = 0; i < spans.length; i++) {
-        spans[i].style = "";
-    }
-    user.style = "";
-    password.style = "";
-    confirmPass.style = "";
-    email.style = "";
-    cellphone.style = "";
-}
-
 //获取焦点时显示提示信息
-function onfocusHint(elem) {
-    // reset()
-        switch(elem) {
-            case user:
-                hintInfo[0].style.display = "block";
-                break;
-            case password:
-                hintInfo[1].style.display = "block";
-                break;
-            case confirmPass:
-                hintInfo[2].style.display = "block";
-                break;
-            case email:
-                hintInfo[3].style.display = "block";
-                break;
-            case cellphone:
-                hintInfo[4].style.display = "block";
-                break;
-        }
-    // }
-}
-
+// function onfocusHint(elem) {
+//     var next = elem.nextElementSibling;
+//     next.style.display = "block";
+// }
 
 //失去焦点时校验表单内容
 function onblurHint(elem) {
-    // reset();
-    switch(elem) {
+    var next = elem.nextElementSibling;
+    next.style.display = "block";
+    switch (elem) {
         case user:
-            if (!elem.value) {
+            var str = user.value;
+            if (!str) {
+                next.innerHTML = "名称不能为空";
+                next.style.color = "#D30910";
                 elem.style.borderColor = "#D30910";
-                errorInfo[0].style.display = "block";
-                return false;
-                // elem.focus();
             } else {
-                elem.style.borderColor = "#51B039";
-                correctInfo[0].style.display = "block";
+                /**
+                 * 一个中文字符占用2个英文字符，此处做下转换
+                 * 如果有中文字符，就将每个中文字符转换成 "aa"
+                 */
+                var re = /[^x00-xff]/g;
+                str = str.replace(re, "aa");
+                if (str.length < 4 || str.length > 16) {
+                    next.innerHTML = "长度应为4~16个字符";
+                    next.style.color = "#D30910";
+                    elem.style.borderColor = "#D30910";
+                } else {
+                    next.innerHTML = "名称格式正确";
+                    next.style.color = "#51B039";
+                    elem.style.borderColor = "#51B039";
+                }
             }
             break;
         case password:
-            if (elem.value.length < 6 || elem.value.length > 16) {
+            var str = password.value;
+            // 校验密码：只能输入6-16个字母、数字、下划线
+            var re = /^(\w){6,16}$/;
+            if (!str) {
+                next.innerHTML = "密码不能为空";
+                next.style.color = "#D30910";
                 elem.style.borderColor = "#D30910";
-                errorInfo[1].style.display = "block";
-                return false;
-                // elem.focus();
             } else {
-                elem.style.borderColor = "#51B039";
-                correctInfo[1].style.display = "block";
+                if (!re.test(str)) {
+                    next.innerHTML = "密码应为6-16个字母、数字或下划线组成";
+                    next.style.color = "#D30910";
+                    elem.style.borderColor = "#D30910";
+                } else {
+                    next.innerHTML = "密码格式正确";
+                    next.style.color = "#51B039";
+                    elem.style.borderColor = "#51B039";
+                }
             }
             break;
         case confirmPass:
-            if (!elem.value || elem.value !== password.value) {
+            var str = confirmPass.value;
+            var psw = password.value;
+            if (!psw) {
+                next.innerHTML = "密码不能为空";
+                next.style.color = "#D30910";
                 elem.style.borderColor = "#D30910";
-                errorInfo[2].style.display = "block";
-                return false;
-                // elem.focus();
+            } else if (str !== psw) {
+                next.innerHTML = "密码输入不一致";
+                next.style.color = "#D30910";
+                elem.style.borderColor = "#D30910";
             } else {
+                next.innerHTML = "密码格式正确";
+                next.style.color = "#51B039";
                 elem.style.borderColor = "#51B039";
-                correctInfo[2].style.display = "block";
             }
             break;
         case email:
-            var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-            if (!reg.test(elem.value)) {
+            var str = email.value;
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+            if (!reg.test(str)) {
+                next.innerHTML = "邮箱格式错误";
+                next.style.color = "#D30910";
                 elem.style.borderColor = "#D30910";
-                errorInfo[3].style.display = "block";
-                return false;
-                // elem.focus();
             } else {
+                next.innerHTML = "邮箱格式正确";
+                next.style.color = "#51B039";
                 elem.style.borderColor = "#51B039";
-                correctInfo[3].style.display = "block";
             }
             break;
         case cellphone:
-            var reg= /^1[3578]\d{9}$/;
-            if (!reg.test(elem.value)) {
+            var str = cellphone.value;
+            var reg = /^1[3578]\d{9}$/;
+            if (!reg.test(str)) {
+                next.innerHTML = "请输入正确的手机号码";
+                next.style.color = "#D30910";
                 elem.style.borderColor = "#D30910";
-                errorInfo[4].style.display = "block";
-                return false;
-                // elem.focus();
             } else {
+                next.innerHTML = "手机号码正确";
+                next.style.color = "#51B039";
                 elem.style.borderColor = "#51B039";
-                correctInfo[4].style.display = "block";
             }
             break;
     }
 }
 
-//输入框绑定获取焦点事件
-user.onfocus = function() {
-    onfocusHint(user);
+function onfocusTag(tag) {
+    var tags = document.getElementsByTagName(tag);
+    for (var i = 0; i < tags.length; i++) {
+        tags[i].onfocus = function() {
+            var next = this.nextElementSibling;
+            next.style.display = "block";
+        }
+    }
 }
-password.onfocus = function() {
-    onfocusHint(password);
-}
-confirmPass.onfocus = function() {
-    onfocusHint(confirmPass);
-}
-email.onfocus = function() {
-    onfocusHint(email);
-}
-cellphone.onfocus = function() {
-    onfocusHint(cellphone);
-}
+// 输入框绑定获取焦点事件
+onfocusTag("input"); 
 
 //输入框绑定失去焦点事件
 user.onblur = function() {
@@ -151,6 +142,14 @@ check.onclick = function() {
     onblurHint(confirmPass);
     onblurHint(email);
     onblurHint(cellphone);
+
+    var inputBox = document.getElementsByTagName("input");
+    for (var i = 0; i < inputBox.length; i++) {
+        //  #D30910 = reg(211, 9, 16)
+        if (inputBox[i].style.borderColor == "rgb(211, 9, 16)") {
+            alert("提交失败");
+            return false;
+        }
+    }
+    alert("提交成功");
 }
-
-
