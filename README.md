@@ -15,4 +15,5 @@ str = str.replace(/(^\s*)|(\s*$)/g, "");
 //  \s*$ 串尾空格
 ```
 * 预览html页面效果
-    前面加上htmlpreview.github.io/?
+
+        前面加上htmlpreview.github.io/?
