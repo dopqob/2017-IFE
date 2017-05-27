@@ -4,49 +4,62 @@ function $(id) {
 
 var angle = 0;	// 旋转角度
 
+var	topDis = 250,		//	小方块的初始top和left
+	leftDis = 250;	
+
 // 左转，逆时针旋转90°
-turnLeft.onclick = function() {
+$("turnLeft").onclick = function() {
 	angle = angle - 90;
 	$("box").style.transform = "rotate(" + angle + "deg)";
 }
 
 // 右转，顺时针旋转90°
-turnRight.onclick = function() {
+$("turnRight").onclick = function() {
 	angle = angle + 90;
 	$("box").style.transform = "rotate(" + angle + "deg)";
 }
 
 // 翻转，顺时针旋转180°
-reversal.onclick = function() {
+$("reversal").onclick = function() {
 	angle = angle + 180;
-		$("box").style.transform = "rotate(" + angle + "deg)";
+	$("box").style.transform = "rotate(" + angle + "deg)";
 }
 
 /**
- * 先获取方块当前tr和td的index，即x,y
- * 然后通过angle的值来判断方块的朝向
- * 最后根据朝向改变x y的值及innerHTML来达到前进效果
+ * 过angle的值来判断方块的朝向
+ * 根据朝向改变top left的值来达到前进效果
  */
 function move() {
-	var top = 250,
-		left = 250;
-	angle = angle % 360;
-	angle = angle >= 0 ? angle : angle + 360;
-	if(angle === 0) {
-		top = top -50;
-		$("box").style.top = top + "px"; 
+	// 定义一个临时变量用来判断方块的朝向
+	var temp = angle % 360;
+	temp = temp >= 0 ? temp : temp + 360;
+	if(temp === 0) {
+		if(topDis > 50) {
+			topDis = topDis -50;
+			console.log("top:"+topDis+"left:"+leftDis);
+			$("box").style.top = topDis + "px"; 
+		}
 	}
-	if(angle === 90) {
-		left = left + 50;
-		$("box").style.left = left + "px"; 
+	if(temp === 90) {
+		if(leftDis < 500) {
+			leftDis = leftDis + 50;
+			console.log("top:"+topDis+"left:"+leftDis);
+			$("box").style.left = leftDis + "px"; 
+		}
 	}
-	if(angle === 180) {
-		top = top + 50;
-		$("box").style.top = top + "px"; 
+	if(temp === 180) {
+		if(topDis < 500) {
+			topDis = topDis + 50;
+			console.log("top:"+topDis+"left:"+leftDis);
+			$("box").style.top = topDis + "px"; 
+		}
 	}
-	if(angle === 270) {
-		left = left - 50;
-		$("box").style.left = left + "px"; 
+	if(temp === 270) {
+		if(leftDis > 50) {
+			leftDis = leftDis - 50;
+			console.log("top:"+topDis+"left:"+leftDis);
+			$("box").style.left = leftDis + "px"; 
+		}
 	}
 }
 // 前进按钮绑定事件
@@ -64,15 +77,15 @@ execute.onclick = function() {
 	switch (val) {
 		case "TUN LEF":
 			angle = angle - 90;
-			box.style.transform = "rotate(" + angle + "deg)";
+			$("box").style.transform = "rotate(" + angle + "deg)";
 			break;
 		case "TUN RIG":
 			angle = angle + 90;
-			box.style.transform = "rotate(" + angle + "deg)";
+			$("box").style.transform = "rotate(" + angle + "deg)";
 			break;
 		case "TUN BAC":
 			angle = angle + 180;
-			box.style.transform = "rotate(" + angle + "deg)";
+			$("box").style.transform = "rotate(" + angle + "deg)";
 			break;
 		case "GO":
 			move();
