@@ -3,21 +3,21 @@ table {
 	margin: 30px auto;
 	border-collapse: collapse;
 }
-th, td {
+td {
 	width: 150px;
 	height: 50px;
-	border: 1px solid #000;
+	border: 1px solid #D5D5D5;
 }
-th {
+thead>tr>td {
 	position: relative;
 	color: #fff;
 	font-weight: normal;
-	background-color: #808080;
+	background-color: #5C5C5C;
 }
 td {
 	text-align: center;
 }
-.up-arrow, .down-arrow {
+.upBtn, .downBtn {
 	position: absolute;
 	right: 18px;
 	width: 0;
@@ -25,11 +25,11 @@ td {
 	border-right: 6px solid transparent;
 	cursor: pointer;
 }
-.up-arrow {
+.upBtn {
 	top: 15px;
 	border-bottom: 10px solid #fff;
 }
-.down-arrow {
+.downBtn {
 	top: 30px;
 	border-top: 10px solid #fff;
 }
